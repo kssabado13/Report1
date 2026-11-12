@@ -7,7 +7,7 @@ format:
     embed-resources: true
 editor: visual
 toc: true
-code-link: false
+code-link: true
 code-fold: true
 cache: true
 ---
@@ -65,7 +65,8 @@ The first 6 rows of the Agreement data set are shown in @tbl-Agreement.
 
 df |>
   head() |> # getting the first six rows of the data
-  kable() # creating a table
+  kable(col.names = c("Learning Agreement", "Learning Status")) # creating a table
+
 ```
 
 ## Descriptive Statistics
@@ -84,3 +85,77 @@ df |>
     include = Status
   )
 ```
+```{r}
+df|>
+ tbl_cross(
+ row = Status,
+ col = Agreement,
+ percent = "column",
+ margin = c("row","column"),
+ label = list(
+ Status ~ "Learning Status",
+ Agreement ~ "Learning Agreement"
+)
+)
+```
+# Hypothesis Testing
+
+## Research Question
+
+Is there a Difference in Students Agreement with having no Monday classes among different Academic Status.
+
+## Hypothesis and Test Statistics
+
+- $H_0:p_{Agreement}-p_{Status}=0$; Students Status does not Affects the Agreement .
+
+- $H_a:p_{Agreement}-p_{Status}\ne0$; Students Status Affects the Agreement.
+
+- Significance level, $\alpha=5\%\,\text{or p-value}\,\le\.05$.
+
+- **Pearson's** $\chi^2$-test of independence
+
+- Independence.
+
+- Expected counts: all expected counts are $\gt5$ (see @tbl-expected).
+
+```{r}
+# Create contingency table
+observed <- table(df$Agreement, df$Status)
+
+# Perform chi-squared test
+chi_test <- chisq.test(observed)
+
+# Extract the expected counts
+expected <- chi_test$expected
+
+# View expected counts
+expected |>
+  as_tibble() |>
+  mutate(
+    " " = c("Agree", "Disagree")
+  ) |>
+  relocate(" ", .before = 1) |>
+  mutate(across(where(is.numeric), ~ round(.x, 2))) |>
+  kable()
+
+
+```
+## Results and Interpretation
+
+The bar chart and test statistics are shown on @fig-test.
+
+```{r}
+#| label: fig-test
+#| fig-cap: Bar chart and test statistics.
+#| fig-height: 3
+
+ggbarstats(
+  data = df,
+  x = Agreement,
+  y = Status,
+  bf.message = FALSE,
+  legend.title = "Agreement"
+)
+```
+
+> The bar chart shows that all Irregular passengers disagreed, whereas most Regular passengers (76%) agreed. A Chi‑squared test showed a significant relationship between passenger status and agreement (\(p < .001\)). Because the *p*-value is less than 0.05, we reject the null hypothesis. There is strong evidence that Irregular and Regular passengers differ significantly in their agreement levels.
