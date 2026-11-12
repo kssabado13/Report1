@@ -1,13 +1,13 @@
 ---
 title: "Two Variables: Qualitative"
-author: Orville D. Hombrebueno
+author: Kyla S. Sabado
 date: today
 format:
   html:
     embed-resources: true
 editor: visual
 toc: true
-code-link: true
+code-link: false
 code-fold: true
 cache: true
 ---
@@ -27,124 +27,60 @@ library(ggstatsplot)
 library(downlit)
 library(broom)
 library(here)
+```
+
+```{r}
+#| label: data
+#| warning: false
+#| message: false
 
 # load the data
 df <- read_csv(here("Data", "data-results-kyla.csv"))
-```
-  mutate(
-    latin = factor(
-      latin, 
-      levels = c("cum laude", "magna cum laude", "suma cum laude"), 
-      ordered = TRUE
-    )
+
+df <- df |>
+  select(
+    Status,
+    Agreement
   )
 ```
 
-## The Titanic Data Set
 
-The `Titanic_full` data set of the [{ggstatsplot}]{style="font-family:monospace;"} package is a data frame with 2201 rows and 5 variables.
+## The Relationship Between Students Status and Their Perception of NVSU's No Monday Class Schedule Implementation
 
-- `id` Dummy identity number for each person.
+The Data set is gathered from 68 students with 2 variable. 
 
-- `Class` 1st, 2nd, 3rd, Crew.
+- `Status` Regular, Iregular.
 
-- `Sex` Male, Female.
+- `Agreement` Agree, Disagree.
 
-- `Age` Child, Adult.
+This Data aims to determine the relationship between students' status and their perceptions of NVSU's No Monday Class Schedule, particularly its effects on their academic workload, time management, study habits, personal well-being, and overall student experience.
 
-- `Survived` No, Yes.
-
-This data set provides information on the fate of passengers on the fatal maiden voyage of the ocean liner Titanic, summarized according to economic status (class), sex, age and survival.
-
-The first 6 rows of the titanic data set are shown in @tbl-titanic.
+The first 6 rows of the Agreement data set are shown in @tbl-Agreement.
 
 ```{r}
-#| label: tbl-titanic
+#| label: tbl-Agreement
 #| warning: false
 #| message: false
 #| tbl-cap: "The first 6 observations of the data set."
 
-titanic |>
+df |>
   head() |> # getting the first six rows of the data
   kable() # creating a table
 ```
 
 ## Descriptive Statistics
 
-The frequency distribution of `Survived` when grouped according to `Sex` is shown in @tbl-summary. Most of the passengers are male. The majority of female passengers survived, whereas the majority of male passengers did not. Nonetheless, the number of survived passengers for both female and male are close, that is 344 and 367 respectively.
+The frequency distribution of students' perceptions of the No Monday Class Schedule implementation when grouped according to their academic status is presented in the summary table. It shows how students from different year levels and academic programs perceive the new schedule. The data will identify the majority of students who agree or disagree with the implementation, particularly in terms of academic workload, time management, study habits, and personal well-being. This will provide an overview of students' opinions and experiences regarding the new scheduling policy at Nueva Vizcaya State University.
+
 
 ```{r}
 #| label: tbl-summary
-#| tbl-cap: "Summary statistics of `Survived` when grouped according to `Sex`."
+#| tbl-cap: "Summary statistics of `Status` when grouped according to `Agreement`."
 #| message: false
 
-titanic |> 
+df |> 
   tbl_summary(
-    by = Sex,
-    include = Survived
+    by = Agreement,
+    include = Status
   )
 ```
-
-# Hypothesis Testing
-
-## Research Question
-
-Does a passenger's sex affect their survival status?
-
-## Hypothesis and Test Statistics
-
-- $H_0:p_{Survived}-p_{Sex}=0$; passenger's sex does not affect their survival status.
-
-- $H_a:p_{Survived}-p_{Sex}\ne0$; passenger's sex affects their survival status.
-
-- Significance level, $\alpha=5\%$.
-
-- **Pearson's** $\chi^2$-test of independence
-
-- Independence.
-
-- Expected counts: all expected counts are $\ge5$ (see @tbl-expected).
-
-```{r}
-#| label: tbl-expected
-#| tbl-cap: Expected counts.
-
-# Create contingency table
-observed <- table(titanic$Survived, titanic$Sex)
-
-# Perform chi-squared test
-chi_test <- chisq.test(observed)
-
-# Extract the expected counts
-expected <- chi_test$expected
-
-# View expected counts
-expected |>
-  as_tibble() |>
-  mutate(
-    " " = c("No", "Yes")
-  ) |>
-  relocate(" ", .before = 1) |>
-  mutate(across(where(is.numeric), ~ round(.x, 2))) |>
-  kable()
-```
-
-## Results and Interpretation
-
-The bar chart and test statistics are shown on @fig-test.
-
-```{r}
-#| label: fig-test
-#| fig-cap: Pie chart and test statistics.
-#| fig-height: 3
-
-ggbarstats(
-  data = titanic,
-  x = Survived,
-  y = Sex,
-  bf.message = FALSE,
-  legend.title = "Survived?"
-)
-```
-
-Based on the bar chart and the *p*-value being lesser than 5% (*p*-value = .001), we reject the null hypothesis. There is a strong evidence that passenger's sex affects their survival status. Additionally, for both females and males, the survival rates were significantly different than 50% as indicated by a goodness of fit test for each gender.

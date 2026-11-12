@@ -1,13 +1,13 @@
 Student No.,Age,Sub/Classes/Week,Academic Hours/Week,College,Year Level,Status,Agreement
-1,19,5,18,CA,1st Year,Regular,Agree
-2,19,6,22,CA,1st Year,Regular,Agree
+1,19,5,18,CA,1st Year,Regular,Disagree
+2,19,6,22,CA,1st Year,Regular,Disagree
 3,20,4,16,CA,2nd Year,Irregular,Disagree
 4,22,7,25,CA,3rd Year,Regular,Agree
 5,19,6,20,CA,2nd Year,Regular,Agree
 6,19,6,21,CAS,1st Year,Regular,Agree
 7,21,5,17,CAS,3rd Year,Irregular,Disagree
 8,20,7,24,CAS,2nd Year,Regular,Agree
-9,19,7,26,CITE,1st Year,Regular,Agree
+9,19,7,26,CITE,1st Year,Regular,Disagree
 10,20,5,18,CITE,2nd Year,Regular,Disagree
 11,21,6,23,CITE,3rd Year,Regular,Agree
 12,19,5,20,CITE,1st Year,Regular,Agree
@@ -24,11 +24,11 @@ Student No.,Age,Sub/Classes/Week,Academic Hours/Week,College,Year Level,Status,A
 23,21,7,25,CBE,3rd Year,Regular,Agree
 24,22,5,19,CBE,4th Year,Irregular,Disagree
 25,23,8,30,CBE,4th Year,Regular,Agree
-26,20,6,21,CBE,2nd Year,Regular,Agree
+26,20,6,21,CBE,2nd Year,Regular,Disagree
 27,21,6,23,CE,3rd Year,Regular,Agree
 28,19,5,19,CE,1st Year,Irregular,Disagree
 29,22,7,26,CE,4th Year,Regular,Agree
-30,20,6,21,CE,2nd Year,Regular,Agree
+30,20,6,21,CE,2nd Year,Regular,Disagree
 31,23,8,28,CE,4th Year,Regular,Agree
 32,19,4,17,CE,1st Year,Irregular,Disagree
 33,21,7,24,CE,3rd Year,Regular,Agree
@@ -46,8 +46,8 @@ Student No.,Age,Sub/Classes/Week,Academic Hours/Week,College,Year Level,Status,A
 45,20,6,20,CHE,2nd Year,Regular,Agree
 46,19,5,18,CHE,1st Year,Irregular,Disagree
 47,22,7,23,CHE,4th Year,Regular,Agree
-48,21,6,20,CHE,3rd Year,Regular,Agree
-49,23,8,23,CHE,4th Year,Regular,Agree
+48,21,6,20,CHE,3rd Year,Regular,Disagree
+49,23,8,23,CHE,4th Year,Regular,Disagree
 50,19,4,16,CHE,1st Year,Irregular,Disagree
 51,21,7,22,CHE,3rd Year,Regular,Agree
 52,20,6,21,CTE,2nd Year,Regular,Disagree
@@ -62,8 +62,8 @@ Student No.,Age,Sub/Classes/Week,Academic Hours/Week,College,Year Level,Status,A
 61,20,5,19,CTE,2nd Year,Irregular,Disagree
 62,22,7,24,CTE,4th Year,Regular,Agree
 63,19,4,16,CTE,1st Year,Irregular,Disagree
-64,23,8,28,CTE,4th Year,Regular,Strongly Agree
-65,21,6,22,CTE,3rd Year,Regular,Agree
-66,20,5,20,CVM,2nd Year,Regular,Agree
-67,22,7,26,CVM,4th Year,Regular,Strongly Agree
-68,19,4,18,CVM,1st Year,Irregular,Neutral
+64,23,8,28,CTE,4th Year,Regular,Agree
+65,21,6,22,CTE,3rd Year,Regular,Disagree
+66,20,5,20,CVM,2nd Year,Regular,Disagree
+67,22,7,26,CVM,4th Year,Regular,Agree
+68,19,4,18,CVM,1st Year,Irregular,Disagree
